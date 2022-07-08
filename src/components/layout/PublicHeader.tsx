@@ -34,12 +34,21 @@ const RegisterLink = styled.a`
   color: white;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.accentDark};
+  }
 `
 
 const LoginLink = styled.a`
   list-style: none;
   color: ${({ theme }) => theme.colors.accent};
   padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.ligthgray};
+  }
 `
 const NavContainer = styled.nav`
   margin-left: auto;
