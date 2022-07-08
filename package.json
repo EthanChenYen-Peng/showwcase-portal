@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "check": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "next": "12.2.1",
@@ -25,7 +26,13 @@
     "eslint-config-next": "12.2.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.30.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
+  },
+  "lint-staged": {
+    "*.{tsx|ts}": "eslint --cache --fix",
+    "*": "prettier --write --ignore-unknown"
   }
 }
