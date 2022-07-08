@@ -1,10 +1,13 @@
 import styled from 'styled-components'
+import { MdBackpack } from 'react-icons/md'
 import Link from 'next/link'
 
 function PublicHeader() {
   return (
     <Header>
-      <LogoContainer>Logo</LogoContainer>
+      <LogoContainer>
+        <MdBackpack size={40} />
+      </LogoContainer>
       <NavContainer>
         <Link href="/login" passHref>
           <LoginLink>Login</LoginLink>
