@@ -1,14 +1,9 @@
-import styled from 'styled-components'
-import { color, ColorProps } from 'styled-system'
+import PublicHeader from '@/components/layout/PublicHeader'
 
 export default function Register() {
   return (
-    <Container bg="dark" color="white">
-      Register
-    </Container>
+    <>
+      <PublicHeader />
+    </>
   )
 }
-
-const Container = styled.div<ColorProps>`
-  ${color}
-`
