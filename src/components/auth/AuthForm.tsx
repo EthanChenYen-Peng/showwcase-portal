@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
 import styled from 'styled-components'
 import {
   layout,
@@ -12,10 +13,12 @@ import {
 function AuthForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     const data = JSON.stringify({ email, password })
+    setLoading(true)
     fetch(`${window.location.origin}/api/register`, {
       method: 'POST',
       credentials: 'include',
@@ -25,8 +28,14 @@ function AuthForm() {
       body: data,
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error))
+      .then((data) => {
+        console.log(data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setLoading(false)
+      })
   }
   return (
     <Container>
@@ -54,7 +63,9 @@ function AuthForm() {
             placeholder="secret"
           />
         </FormGroup>
-        <SubmitBtn>Register</SubmitBtn>
+        <SubmitBtn disabled={loading}>
+          {loading ? <ClipLoader loading={loading} /> : 'Register'}
+        </SubmitBtn>
       </Form>
     </Container>
   )
@@ -63,14 +74,16 @@ function AuthForm() {
 export default AuthForm
 
 const SubmitBtn = styled.button`
-  padding: 1rem;
+  min-height: 50px;
   border: none;
   color: white;
-  background-color: ${({ theme }) => theme.colors.accent};
+  background-color: ${({ theme, disabled }) => {
+    return disabled ? theme.colors.accentLight : theme.colors.accent
+  }};
   transition: background-color 0.2s;
   cursor: pointer;
   margin-top: 1rem;
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.accentDark};
   }
 `
