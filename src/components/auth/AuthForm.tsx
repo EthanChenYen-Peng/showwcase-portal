@@ -1,24 +1,51 @@
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { space, SpaceProps, typography, TypographyProps } from 'styled-system'
 
 function AuthForm() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    const data = JSON.stringify({ email, password })
+    fetch(`${window.location.origin}/api/register`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error))
+  }
   return (
     <Container>
       <Header fontSize="3rem" my="2rem">
         Register
       </Header>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label fontWeight="500" htmlFor="email">
             Email
           </Label>
-          <Input type="text" placeholder="yourname@example.com" />
+          <Input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="yourname@example.com"
+          />
         </FormGroup>
         <FormGroup>
           <Label fontWeight="500" htmlFor="password">
             Password
           </Label>
-          <Input type="password" placeholder="secret" />
+          <Input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="secret"
+          />
         </FormGroup>
         <SubmitBtn>Register</SubmitBtn>
       </Form>
