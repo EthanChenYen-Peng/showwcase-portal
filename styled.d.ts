@@ -6,6 +6,8 @@ declare module 'styled-components' {
       dark: string
       accent: string
       primary: string
+      ligthgray: string
+      accentDark: string
     }
   }
 }

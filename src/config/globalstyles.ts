@@ -14,6 +14,10 @@ html, body {
   background-color: ${({ theme }) => theme.colors.primary};
 }
 
+#__next {
+  height: 100%;
+}
+
 a {
   text-decoration: none;
 }
