@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { space, SpaceProps, typography, TypographyProps } from 'styled-system'
+import {
+  layout,
+  LayoutProps,
+  space,
+  SpaceProps,
+  typography,
+  TypographyProps,
+} from 'styled-system'
 
 function AuthForm() {
   const [email, setEmail] = useState('')
@@ -26,7 +33,7 @@ function AuthForm() {
       <Header fontSize="3rem" my="2rem">
         Register
       </Header>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} minWidth={400} width={[0.7, 1 / 3]}>
         <FormGroup>
           <Label fontWeight="500" htmlFor="email">
             Email
@@ -87,10 +94,10 @@ const Label = styled.label<TypographyProps>`
   ${typography}
 `
 
-const Form = styled.form`
+const Form = styled.form<LayoutProps>`
+  ${layout}
   border-radius: 10px;
   border: 1px solid black;
-  width: 30%;
   padding: 2rem 3rem;
   display: flex;
   flex-direction: column;

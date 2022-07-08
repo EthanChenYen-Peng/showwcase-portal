@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { MdBackpack } from 'react-icons/md'
 import Link from 'next/link'
+import { SpaceProps, space, layout, LayoutProps } from 'styled-system'
 
 function PublicHeader() {
   return (
-    <Header>
+    <Header paddingY={'2rem'} width={['80%', '60%']}>
       <LogoContainer>
         <MdBackpack size={40} />
       </LogoContainer>
@@ -22,10 +23,10 @@ function PublicHeader() {
 
 export default PublicHeader
 
-const Header = styled.div`
+const Header = styled.div<SpaceProps | LayoutProps>`
+  ${space}
+  ${layout}
   display: flex;
-  padding: 2rem 0rem;
-  width: 60%;
   margin: 0 auto;
   align-items: center;
 `
