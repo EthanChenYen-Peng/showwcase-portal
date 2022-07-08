@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
+import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import {
   layout,
@@ -9,33 +10,22 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system'
+import { register } from '@/lib/api'
+import { RegisterUserPayload, RegisterResponse } from '@/lib/types'
 
 function AuthForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+
+  const { mutate, isLoading, error, isError } = useMutation<
+    RegisterResponse,
+    Error,
+    RegisterUserPayload
+  >(register)
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    const data = JSON.stringify({ email, password })
-    setLoading(true)
-    fetch(`${window.location.origin}/api/register`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.log(error)
-        setLoading(false)
-      })
+    mutate({ email, password })
   }
   return (
     <Container>
@@ -63,9 +53,11 @@ function AuthForm() {
             placeholder="secret"
           />
         </FormGroup>
-        <SubmitBtn disabled={loading}>
-          {loading ? <ClipLoader loading={loading} /> : 'Register'}
+        <SubmitBtn disabled={isLoading}>
+          {isLoading ? <ClipLoader loading={isLoading} /> : 'Register'}
         </SubmitBtn>
+
+        {isError ? <div>{error.message}</div> : null}
       </Form>
     </Container>
   )
