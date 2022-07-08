@@ -3,7 +3,7 @@ import { color, ColorProps } from 'styled-system'
 
 export default function Register() {
   return (
-    <Container bg="navy" color="white">
+    <Container bg="dark" color="white">
       Register
     </Container>
   )
