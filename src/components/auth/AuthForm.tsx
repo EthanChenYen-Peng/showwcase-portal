@@ -15,6 +15,11 @@ import {
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
 import { useRouter } from 'next/router'
+import Flex from '@/components/primitives/Flex'
+import Stack from '@/components/primitives/Stack'
+import Input from '@/components/primitives/Input'
+import Label from '@/components/primitives/Label'
+import Box from '@/components/primitives/Box'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
@@ -42,12 +47,17 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
     mutate({ email, password })
   }
   return (
-    <Container>
+    <Flex
+      height="100%"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
       <Header fontSize="3rem" my="2rem">
         {pageHeading}
       </Header>
       <Form onSubmit={handleSubmit} minWidth={400} width={[0.7, 1 / 3]}>
-        <FormGroup>
+        <Stack gap="0.5rem">
           <Label fontWeight="500" htmlFor="email">
             Email
           </Label>
@@ -56,8 +66,8 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
             type="email"
             placeholder="yourname@example.com"
           />
-        </FormGroup>
-        <FormGroup>
+        </Stack>
+        <Stack gap="0.5rem">
           <Label fontWeight="500" htmlFor="password">
             Password
           </Label>
@@ -66,24 +76,17 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
             type="password"
             placeholder="secret"
           />
-        </FormGroup>
+        </Stack>
         <SubmitBtn disabled={isLoading}>
           {isLoading ? <ClipLoader loading={isLoading} /> : pageHeading}
         </SubmitBtn>
-
-        {isError ? (
-          <ErrorMessage color="danger">{error.message}</ErrorMessage>
-        ) : null}
+        {isError ? <Box color="danger">{error.message}</Box> : null}
       </Form>
-    </Container>
+    </Flex>
   )
 }
 
 export default AuthForm
-
-const ErrorMessage = styled.div<ColorProps>`
-  ${color}
-`
 
 const SubmitBtn = styled.button`
   min-height: 50px;
@@ -105,20 +108,6 @@ const Header = styled.h1<TypographyProps | SpaceProps>`
   ${space}
 `
 
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`
-
-const Input = styled.input`
-  padding: 0.5rem 1rem;
-`
-
-const Label = styled.label<TypographyProps>`
-  ${typography}
-`
-
 const Form = styled.form<LayoutProps>`
   ${layout}
   border-radius: 10px;
@@ -127,11 +116,4 @@ const Form = styled.form<LayoutProps>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`
-const Container = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 `
