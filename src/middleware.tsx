@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/', '/login', '/register']
+const protectedRoutes = ['/']
+const publicRoutes = ['/login', '/register']
 
 export default function middleware(req: NextRequest) {
   const token = req.cookies.get('SHOWWCASE_ACCESS_TOKEN')
@@ -13,7 +13,7 @@ export default function middleware(req: NextRequest) {
 
   if (publicRoutes.find((p) => p === req.nextUrl.pathname)) {
     if (token) {
-      return NextResponse.redirect(new URL('/dashboard', req.url))
+      return NextResponse.redirect(new URL('/', req.url))
     }
   }
 }

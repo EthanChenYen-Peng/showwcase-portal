@@ -41,7 +41,6 @@ export async function login(data: AuthUserPayload): Promise<AuthResponse> {
 }
 
 export async function logout(): Promise<AuthResponse> {
-  console.log('logout api')
   const response = await fetch(`${window.location.origin}/api/logout`, {
     method: 'GET',
     credentials: 'include',

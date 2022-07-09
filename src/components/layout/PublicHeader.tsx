@@ -19,7 +19,6 @@ function PublicHeader({ user }: Props) {
   })
 
   const handleLogout = () => {
-    console.log('logout')
     mutate()
   }
   return (

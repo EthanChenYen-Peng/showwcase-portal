@@ -33,7 +33,7 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
     AuthUserPayload
   >(mutationFunction, {
     onSuccess: async () => {
-      await router.push('/dashboard')
+      await router.push('/')
     },
   })
 
