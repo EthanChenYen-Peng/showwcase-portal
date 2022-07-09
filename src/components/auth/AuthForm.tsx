@@ -10,10 +10,16 @@ import {
   typography,
   TypographyProps,
 } from 'styled-system'
-import { register } from '@/lib/api'
+import { register, login } from '@/lib/api'
 import { RegisterUserPayload, RegisterResponse } from '@/lib/types'
 
-function AuthForm() {
+interface AuthFormProps {
+  mode?: 'register' | 'login'
+}
+function AuthForm({ mode = 'register' }: AuthFormProps) {
+  const isRegisterForm = mode === 'register'
+  const mutationFunction = isRegisterForm ? register : login
+  const pageHeading = isRegisterForm ? 'Register' : 'Login'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -21,7 +27,7 @@ function AuthForm() {
     RegisterResponse,
     Error,
     RegisterUserPayload
-  >(register)
+  >(mutationFunction)
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -30,7 +36,7 @@ function AuthForm() {
   return (
     <Container>
       <Header fontSize="3rem" my="2rem">
-        Register
+        {pageHeading}
       </Header>
       <Form onSubmit={handleSubmit} minWidth={400} width={[0.7, 1 / 3]}>
         <FormGroup>
@@ -54,7 +60,7 @@ function AuthForm() {
           />
         </FormGroup>
         <SubmitBtn disabled={isLoading}>
-          {isLoading ? <ClipLoader loading={isLoading} /> : 'Register'}
+          {isLoading ? <ClipLoader loading={isLoading} /> : pageHeading}
         </SubmitBtn>
 
         {isError ? <div>{error.message}</div> : null}
