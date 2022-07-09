@@ -16,3 +16,12 @@ export interface AuthApiRequest extends NextApiRequest {
     password: string
   }
 }
+
+export interface IUser {
+  email: string
+}
+
+export interface IAccessToken {
+  id: number
+  email: string
+}
