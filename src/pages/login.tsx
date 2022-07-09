@@ -1,11 +1,10 @@
-import PublicHeader from '@/components/layout/PublicHeader'
 import AuthForm from '@/components/auth/AuthForm'
+import MainLayout from '@/components/layout/MainLayout'
 
 export default function Login() {
   return (
-    <>
-      <PublicHeader />
+    <MainLayout>
       <AuthForm mode="login" />
-    </>
+    </MainLayout>
   )
 }
