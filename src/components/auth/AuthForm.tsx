@@ -11,7 +11,7 @@ import {
   TypographyProps,
 } from 'styled-system'
 import { register, login } from '@/lib/api'
-import { RegisterUserPayload, RegisterResponse } from '@/lib/types'
+import { AuthUserPayload, AuthResponse } from '@/lib/types'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
@@ -24,9 +24,9 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
   const [password, setPassword] = useState('')
 
   const { mutate, isLoading, error, isError } = useMutation<
-    RegisterResponse,
+    AuthResponse,
     Error,
-    RegisterUserPayload
+    AuthUserPayload
   >(mutationFunction)
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {

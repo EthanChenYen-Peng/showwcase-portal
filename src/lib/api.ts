@@ -1,8 +1,6 @@
-import { RegisterUserPayload, RegisterResponse } from './types'
+import { AuthUserPayload, AuthResponse } from './types'
 
-export async function register(
-  data: RegisterUserPayload
-): Promise<RegisterResponse> {
+export async function register(data: AuthUserPayload): Promise<AuthResponse> {
   const response = await fetch(`${window.location.origin}/api/register`, {
     method: 'POST',
     credentials: 'include',
@@ -11,7 +9,7 @@ export async function register(
     },
     body: JSON.stringify(data),
   })
-  const result = (await response.json()) as RegisterResponse
+  const result = (await response.json()) as AuthResponse
   if (!response.ok) {
     if (result.error) {
       throw new Error(result.error)
@@ -22,9 +20,7 @@ export async function register(
   return result
 }
 
-export async function login(
-  data: RegisterUserPayload
-): Promise<RegisterResponse> {
+export async function login(data: AuthUserPayload): Promise<AuthResponse> {
   const response = await fetch(`${window.location.origin}/api/login`, {
     method: 'POST',
     credentials: 'include',
@@ -33,7 +29,7 @@ export async function login(
     },
     body: JSON.stringify(data),
   })
-  const result = (await response.json()) as RegisterResponse
+  const result = (await response.json()) as AuthResponse
   if (!response.ok) {
     if (result.error) {
       throw new Error(result.error)

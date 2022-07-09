@@ -1,11 +1,11 @@
 import { NextApiRequest } from 'next'
 
-export interface RegisterUserPayload {
+export interface AuthUserPayload {
   email: string
   password: string
 }
 
-export interface RegisterResponse {
+export interface AuthResponse {
   email?: string
   error?: string
 }
