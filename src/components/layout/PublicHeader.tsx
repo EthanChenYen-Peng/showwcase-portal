@@ -2,20 +2,32 @@ import styled from 'styled-components'
 import { MdBackpack } from 'react-icons/md'
 import Link from 'next/link'
 import { SpaceProps, space, layout, LayoutProps } from 'styled-system'
+import { IUser } from '@/lib/types'
 
-function PublicHeader() {
+interface Props {
+  user?: IUser
+}
+function PublicHeader({ user }: Props) {
   return (
     <Header paddingY={'2rem'} width={['80%', '60%']}>
       <LogoContainer>
         <MdBackpack size={40} />
       </LogoContainer>
       <NavContainer>
-        <Link href="/login" passHref>
-          <LoginLink>Login</LoginLink>
-        </Link>
-        <Link href="/register" passHref>
-          <RegisterLink>Register</RegisterLink>
-        </Link>
+        {user ? (
+          <Link href="/logout" passHref>
+            <RegisterLink>logout</RegisterLink>
+          </Link>
+        ) : (
+          <>
+            <Link href="/login" passHref>
+              <LoginLink>Login</LoginLink>
+            </Link>
+            <Link href="/register" passHref>
+              <RegisterLink>Register</RegisterLink>
+            </Link>
+          </>
+        )}
       </NavContainer>
     </Header>
   )

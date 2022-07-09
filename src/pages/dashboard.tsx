@@ -1,16 +1,17 @@
 import { GetServerSideProps } from 'next'
 import { getUserFromToken } from '@/utils/auth'
 import type { IUser } from '@/lib/types'
+import MainLayout from '@/components/layout/MainLayout'
 
 interface Props {
   user: IUser
 }
 function Dashboard({ user }: Props) {
   return (
-    <div>
+    <MainLayout user={user}>
       <p>Dashboard</p>
       {user.email}
-    </div>
+    </MainLayout>
   )
 }
 
