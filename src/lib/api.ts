@@ -39,3 +39,23 @@ export async function login(data: AuthUserPayload): Promise<AuthResponse> {
   }
   return result
 }
+
+export async function logout(): Promise<AuthResponse> {
+  console.log('logout api')
+  const response = await fetch(`${window.location.origin}/api/logout`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  const result = (await response.json()) as AuthResponse
+  if (!response.ok) {
+    if (result.error) {
+      throw new Error(result.error)
+    } else {
+      throw new Error(`${response.status}: ${response.statusText}`)
+    }
+  }
+  return result
+}

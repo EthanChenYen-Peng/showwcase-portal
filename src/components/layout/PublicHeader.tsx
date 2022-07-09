@@ -1,13 +1,27 @@
 import styled from 'styled-components'
 import { MdBackpack } from 'react-icons/md'
 import Link from 'next/link'
+import { useMutation } from 'react-query'
+import { logout } from '@/lib/api'
+import { useRouter } from 'next/router'
 import { SpaceProps, space, layout, LayoutProps } from 'styled-system'
-import { IUser } from '@/lib/types'
+import type { IUser } from '@/lib/types'
 
 interface Props {
   user?: IUser
 }
 function PublicHeader({ user }: Props) {
+  const router = useRouter()
+  const { mutate } = useMutation(logout, {
+    onSuccess: async () => {
+      await router.push('/login')
+    },
+  })
+
+  const handleLogout = () => {
+    console.log('logout')
+    mutate()
+  }
   return (
     <Header paddingY={'2rem'} width={['80%', '60%']}>
       <LogoContainer>
@@ -15,9 +29,9 @@ function PublicHeader({ user }: Props) {
       </LogoContainer>
       <NavContainer>
         {user ? (
-          <Link href="/logout" passHref>
-            <RegisterLink>logout</RegisterLink>
-          </Link>
+          <RegisterLink as="button" onClick={handleLogout}>
+            logout
+          </RegisterLink>
         ) : (
           <>
             <Link href="/login" passHref>
@@ -46,6 +60,8 @@ const Header = styled.div<SpaceProps | LayoutProps>`
 const LogoContainer = styled.div``
 
 const RegisterLink = styled.a`
+  cursor: pointer;
+  border: none;
   background-color: ${({ theme }) => theme.colors.accent};
   color: white;
   padding: 0.75rem 1rem;
