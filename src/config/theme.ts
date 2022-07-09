@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
     accentLight: '#b2d6f7',
     primary: '#fff',
     ligthgray: '#e8e8e8',
+    danger: 'red',
   },
 }
 

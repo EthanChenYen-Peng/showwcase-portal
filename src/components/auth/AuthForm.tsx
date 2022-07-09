@@ -9,6 +9,8 @@ import {
   SpaceProps,
   typography,
   TypographyProps,
+  color,
+  ColorProps,
 } from 'styled-system'
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
@@ -69,13 +71,19 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
           {isLoading ? <ClipLoader loading={isLoading} /> : pageHeading}
         </SubmitBtn>
 
-        {isError ? <div>{error.message}</div> : null}
+        {isError ? (
+          <ErrorMessage color="danger">{error.message}</ErrorMessage>
+        ) : null}
       </Form>
     </Container>
   )
 }
 
 export default AuthForm
+
+const ErrorMessage = styled.div<ColorProps>`
+  ${color}
+`
 
 const SubmitBtn = styled.button`
   min-height: 50px;

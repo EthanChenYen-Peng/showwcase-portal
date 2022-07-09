@@ -9,6 +9,7 @@ declare module 'styled-components' {
       ligthgray: string
       accentDark: string
       accentLight: string
+      danger: string
     }
   }
 }
