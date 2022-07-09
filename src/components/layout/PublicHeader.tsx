@@ -24,7 +24,11 @@ function PublicHeader({ user }: Props) {
   return (
     <Header paddingY={'2rem'} width={['80%', '60%']}>
       <LogoContainer>
-        <MdBackpack size={40} />
+        <Link href="/">
+          <a>
+            <MdBackpack size={40} />
+          </a>
+        </Link>
       </LogoContainer>
       <NavContainer>
         {user ? (
