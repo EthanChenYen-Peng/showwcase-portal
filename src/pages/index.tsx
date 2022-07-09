@@ -2,13 +2,19 @@ import { GetServerSideProps } from 'next'
 import { getUserFromToken } from '@/utils/auth'
 import type { IUser } from '@/lib/types'
 import MainLayout from '@/components/layout/MainLayout'
+import UserNameForm from '@/components/dashboard/UserNameForm'
 
 interface Props {
   user: IUser
 }
 function Home({ user }: Props) {
   const { name } = user
-  return <MainLayout user={user}>{name}</MainLayout>
+  return (
+    <MainLayout user={user}>
+      asdf
+      {name ? null : <UserNameForm />}
+    </MainLayout>
+  )
 }
 
 export default Home
