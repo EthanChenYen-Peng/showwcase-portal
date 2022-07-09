@@ -31,8 +31,13 @@ export function signInUser(res: NextApiResponse, token: string) {
   )
 }
 
-export async function getUserFromToken(token: string) {
+export function getUserIdFromToken(token: string) {
   const { id } = jwt.verify(token, jwtSecret) as IAccessToken
+  return id
+}
+
+export async function getUserFromToken(token: string) {
+  const id = getUserIdFromToken(token)
   const user = await prisma.user.findFirst({ where: { id } })
   return user
 }

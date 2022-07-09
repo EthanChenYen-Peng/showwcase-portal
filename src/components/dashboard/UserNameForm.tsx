@@ -1,4 +1,8 @@
+import { updateUser } from '@/lib/api'
+import { FormEventHandler, useState } from 'react'
+import { useMutation } from 'react-query'
 import styled from 'styled-components'
+import ClipLoader from 'react-spinners/ClipLoader'
 import {
   typography,
   TypographyProps,
@@ -6,9 +10,17 @@ import {
   SpaceProps,
   layout,
   LayoutProps,
+  FlexboxProps,
+  flexbox,
 } from 'styled-system'
 
 function UserNameForm() {
+  const [name, setName] = useState('')
+  const { mutate, isLoading } = useMutation(updateUser)
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    mutate({ name })
+  }
   return (
     <Container>
       <Header fontSize={['1.5rem', '2rem']} marginY={'2rem'}>
@@ -17,7 +29,7 @@ function UserNameForm() {
       <Header fontSize={['1.25rem', '1.5rem']} marginY={'1rem'}>
         Type your name and click &quot;Enter&quot; below to begin!
       </Header>
-      <form>
+      <Form onSubmit={handleSubmit} flexDirection="column">
         <Input
           type="text"
           placeholder="Your name"
@@ -25,9 +37,12 @@ function UserNameForm() {
           marginY={'1rem'}
           paddingY={'0.5rem'}
           paddingX={'1rem'}
+          onChange={(e) => setName(e.target.value)}
         />
-      </form>
-      <SubmitBtn>Enter</SubmitBtn>
+        <SubmitBtn disabled={isLoading}>
+          {isLoading ? <ClipLoader loading={isLoading} /> : 'Enter'}
+        </SubmitBtn>
+      </Form>
     </Container>
   )
 }
@@ -42,6 +57,11 @@ const Header = styled.h2<TypographyProps | SpaceProps>`
 const Input = styled.input<SpaceProps | LayoutProps>`
   ${space}
   ${layout}
+`
+
+const Form = styled.form<FlexboxProps>`
+  ${flexbox}
+  display: flex;
 `
 
 const Container = styled.div`
@@ -60,6 +80,7 @@ const SubmitBtn = styled.button`
   border: none;
   font-size: 1.25rem;
   color: white;
+  align-self: center;
   background-color: ${({ theme, disabled }) => {
     return disabled ? theme.colors.accentLight : theme.colors.accent
   }};

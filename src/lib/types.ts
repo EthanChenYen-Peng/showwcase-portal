@@ -30,3 +30,9 @@ export interface IAccessToken {
 export interface HasError {
   error?: string
 }
+
+export interface UserApiRequest extends NextApiRequest {
+  body: {
+    name: string
+  }
+}

@@ -1,4 +1,4 @@
-import { AuthUserPayload, AuthResponse, HasError } from './types'
+import { AuthUserPayload, AuthResponse, HasError, IUser } from './types'
 
 export async function register(data: AuthUserPayload): Promise<AuthResponse> {
   return fetchWithError(`${window.location.origin}/api/register`, {
@@ -16,6 +16,14 @@ export async function login(data: AuthUserPayload): Promise<AuthResponse> {
 
 export async function logout(): Promise<AuthResponse> {
   return fetchWithError(`${window.location.origin}/api/logout`)
+}
+
+export async function updateUser(data: { name: string }) {
+  console.log('data', data)
+  return fetchWithError(`${window.location.origin}/api/users`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
 }
 
 export async function fetchWithError(url: string, options: object = {}) {
