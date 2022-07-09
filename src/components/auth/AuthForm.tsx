@@ -12,6 +12,7 @@ import {
 } from 'styled-system'
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
+import { useRouter } from 'next/router'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
@@ -22,12 +23,17 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
   const pageHeading = isRegisterForm ? 'Register' : 'Login'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
   const { mutate, isLoading, error, isError } = useMutation<
     AuthResponse,
     Error,
     AuthUserPayload
-  >(mutationFunction)
+  >(mutationFunction, {
+    onSuccess: async () => {
+      await router.push('/dashboard')
+    },
+  })
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
