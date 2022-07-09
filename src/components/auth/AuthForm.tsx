@@ -15,11 +15,7 @@ import {
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
 import { useRouter } from 'next/router'
-import Flex from '@/components/primitives/Flex'
-import Stack from '@/components/primitives/Stack'
-import Input from '@/components/primitives/Input'
-import Label from '@/components/primitives/Label'
-import Box from '@/components/primitives/Box'
+import { Flex, Stack, Input, Label, Box } from '@/components/primitives'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
