@@ -1,54 +1,33 @@
-import { AuthUserPayload, AuthResponse } from './types'
+import { AuthUserPayload, AuthResponse, HasError } from './types'
 
 export async function register(data: AuthUserPayload): Promise<AuthResponse> {
-  const response = await fetch(`${window.location.origin}/api/register`, {
+  return fetchWithError(`${window.location.origin}/api/register`, {
     method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(data),
   })
-  const result = (await response.json()) as AuthResponse
-  if (!response.ok) {
-    if (result.error) {
-      throw new Error(result.error)
-    } else {
-      throw new Error(`${response.status}: ${response.statusText}`)
-    }
-  }
-  return result
 }
 
 export async function login(data: AuthUserPayload): Promise<AuthResponse> {
-  const response = await fetch(`${window.location.origin}/api/login`, {
+  return fetchWithError(`${window.location.origin}/api/login`, {
     method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(data),
   })
-  const result = (await response.json()) as AuthResponse
-  if (!response.ok) {
-    if (result.error) {
-      throw new Error(result.error)
-    } else {
-      throw new Error(`${response.status}: ${response.statusText}`)
-    }
-  }
-  return result
 }
 
 export async function logout(): Promise<AuthResponse> {
-  const response = await fetch(`${window.location.origin}/api/logout`, {
+  return fetchWithError(`${window.location.origin}/api/logout`)
+}
+
+export async function fetchWithError(url: string, options: object = {}) {
+  const response = await fetch(url, {
     method: 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
+    ...options,
   })
-  const result = (await response.json()) as AuthResponse
+  const result = (await response.json()) as HasError
   if (!response.ok) {
     if (result.error) {
       throw new Error(result.error)

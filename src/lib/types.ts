@@ -26,3 +26,7 @@ export interface IAccessToken {
   id: number
   email: string
 }
+
+export interface HasError {
+  error?: string
+}
