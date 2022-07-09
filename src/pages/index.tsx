@@ -7,12 +7,8 @@ interface Props {
   user: IUser
 }
 function Home({ user }: Props) {
-  return (
-    <MainLayout user={user}>
-      <p>Dashboard</p>
-      {user.email}
-    </MainLayout>
-  )
+  const { name } = user
+  return <MainLayout user={user}>{name}</MainLayout>
 }
 
 export default Home
@@ -24,5 +20,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (token) {
     user = await getUserFromToken(token)
   }
-  return { props: { user: { email: user?.email } } }
+  return { props: { user: { email: user?.email, name: user?.name } } }
 }
