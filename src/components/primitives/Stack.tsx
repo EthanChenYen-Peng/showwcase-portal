@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 import Flex from './Flex'
 
-interface Props {
-  gap?: string
-}
-const Stack = styled(Flex)<Props>`
+const Stack = styled(Flex)`
   flex-direction: column;
-  gap: ${({ gap }) => gap};
 `
 export default Stack
