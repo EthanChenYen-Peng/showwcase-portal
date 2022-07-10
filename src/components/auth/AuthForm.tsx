@@ -2,20 +2,10 @@ import React, { useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { useMutation } from 'react-query'
 import styled from 'styled-components'
-import {
-  layout,
-  LayoutProps,
-  space,
-  SpaceProps,
-  typography,
-  TypographyProps,
-  color,
-  ColorProps,
-} from 'styled-system'
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
 import { useRouter } from 'next/router'
-import { Flex, Stack, Input, Label, Box } from '@/components/primitives'
+import { Flex, Stack, Input, Label, Box, Text } from '@/components/primitives'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
@@ -49,10 +39,20 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
       alignItems="center"
       flexDirection="column"
     >
-      <Header fontSize="3rem" my="2rem">
+      <Text as="h1" fontSize="3rem" my="2rem">
         {pageHeading}
-      </Header>
-      <Form onSubmit={handleSubmit} minWidth={400} width={[0.7, 1 / 3]}>
+      </Text>
+      <Stack
+        as="form"
+        onSubmit={handleSubmit}
+        minWidth={400}
+        width={[0.7, 1 / 3]}
+        borderRadius="10px"
+        border="1px solid"
+        borderColor="black"
+        gap="1rem"
+        padding="2rem 3rem"
+      >
         <Stack gap="0.5rem">
           <Label fontWeight="500" htmlFor="email">
             Email
@@ -77,7 +77,7 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
           {isLoading ? <ClipLoader loading={isLoading} /> : pageHeading}
         </SubmitBtn>
         {isError ? <Box color="danger">{error.message}</Box> : null}
-      </Form>
+      </Stack>
     </Flex>
   )
 }
@@ -97,19 +97,4 @@ const SubmitBtn = styled.button`
   &:hover:not(:disabled) {
     background-color: ${({ theme }) => theme.colors.accentDark};
   }
-`
-
-const Header = styled.h1<TypographyProps | SpaceProps>`
-  ${typography}
-  ${space}
-`
-
-const Form = styled.form<LayoutProps>`
-  ${layout}
-  border-radius: 10px;
-  border: 1px solid black;
-  padding: 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 `

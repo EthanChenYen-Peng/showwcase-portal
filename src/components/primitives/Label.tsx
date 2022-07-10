@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import BaseText from './BaseText'
+import Text from './Text'
 
-const Label = BaseText.withComponent('label')
+const Label = Text.withComponent('label')
 
 export default Label

@@ -4,9 +4,9 @@ import type { TypographyProps, LayoutProps, SpaceProps } from 'styled-system'
 
 type Props = SpaceProps | TypographyProps | LayoutProps
 
-const BaseText = styled.input<Props>`
+const Text = styled.input<Props>`
   ${space}
   ${typography}
   ${layout}
 `
-export default BaseText
+export default Text

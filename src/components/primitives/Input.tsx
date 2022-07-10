@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import BaseText from './BaseText'
+import Text from './Text'
 
-const BaseInput = BaseText.withComponent('input')
+const BaseInput = Text.withComponent('input')
 
 const Input = styled(BaseInput)`
   padding: 0.5rem 1rem;
