@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
 import { createEducation } from '@/lib/api'
+
 function EducationForm() {
   const [degree, setDegree] = useState('')
   const [school, setSchool] = useState('')
@@ -9,7 +10,13 @@ function EducationForm() {
   const [end, setEnd] = useState('')
   const [grade, setGrade] = useState('')
   const [description, setDescription] = useState('')
-  const { mutate } = useMutation(createEducation)
+
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation(createEducation, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(['educations'])
+    },
+  })
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
