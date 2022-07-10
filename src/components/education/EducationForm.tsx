@@ -3,7 +3,10 @@ import { useMutation, useQueryClient } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
 import { createEducation } from '@/lib/api'
 
-function EducationForm() {
+interface Props {
+  afterSubmitSuecess: () => void
+}
+function EducationForm({ afterSubmitSuecess }: Props) {
   const [degree, setDegree] = useState('')
   const [school, setSchool] = useState('')
   const [start, setStart] = useState('')
@@ -15,6 +18,7 @@ function EducationForm() {
   const { mutate } = useMutation(createEducation, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(['educations'])
+      afterSubmitSuecess()
     },
   })
 
