@@ -2,7 +2,7 @@ import { NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
 import jwt from 'jsonwebtoken'
 import cookie from 'cookie'
-import { IAccessToken, IUser } from '@/lib/types'
+import { IAccessToken } from '@/lib/types'
 
 const jwtSecret = process.env.JWT_SECRET || 'asdfqwerasdf'
 export function createToken(payload: object) {

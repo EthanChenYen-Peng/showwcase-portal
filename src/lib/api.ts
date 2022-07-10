@@ -1,4 +1,4 @@
-import { AuthUserPayload, AuthResponse, HasError, IUser } from './types'
+import { AuthUserPayload, AuthResponse, HasError } from './types'
 
 export async function register(data: AuthUserPayload): Promise<AuthResponse> {
   return fetchWithError(`${window.location.origin}/api/register`, {
