@@ -13,7 +13,6 @@ function EducationForm() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    console.log('submit')
     mutate({ degree, school, start, end, grade, description })
   }
   return (

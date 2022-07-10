@@ -6,16 +6,29 @@ import MainLayout from '@/components/layout/MainLayout'
 import { Text, Stack, Box, Grid, Button } from '@/components/primitives'
 import Modal from '@/components/utils/Modal'
 import EducationForm from '@/components/education/EducationForm'
+import { fetchEducations } from '@/lib/api'
+import { useQuery } from 'react-query'
+import ClipLoader from 'react-spinners/ClipLoader'
+import EducationList from '@/components/education/EducationList'
+import { IEducation } from '@/lib/types'
 
 interface Props {
   user: IUser
 }
 
+interface Response {
+  educations: IEducation[]
+}
 function Education({ user }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false)
   const { name } = user
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
+
+  const { isLoading, isSuccess, data } = useQuery(
+    ['educations'],
+    fetchEducations<Response>
+  )
   return (
     <MainLayout user={user}>
       <Box width="90%" margin="0 auto">
@@ -39,7 +52,10 @@ function Education({ user }: Props) {
           <Box gridColumn="span 3" bg="lightgray">
             asdf
           </Box>
-          <Box gridColumn="span 7" bg="lightgray"></Box>
+          <Box gridColumn="span 7" bg="lightgray">
+            <ClipLoader loading={isLoading} />
+            {isSuccess && <EducationList educations={data?.educations} />}
+          </Box>
         </Grid>
       </Box>
     </MainLayout>

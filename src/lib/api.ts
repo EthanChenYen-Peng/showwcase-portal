@@ -39,7 +39,11 @@ export async function createEducation(data: {
   })
 }
 
-export async function fetchWithError(url: string, options: object = {}) {
+export async function fetchEducations<T>() {
+  return fetchWithError<T>(`${window.location.origin}/api/educations`)
+}
+
+export async function fetchWithError<T>(url: string, options: object = {}) {
   const response = await fetch(url, {
     method: 'GET',
     credentials: 'include',
@@ -48,7 +52,7 @@ export async function fetchWithError(url: string, options: object = {}) {
     },
     ...options,
   })
-  const result = (await response.json()) as HasError
+  const result = (await response.json()) as T & HasError
   if (!response.ok) {
     if (result.error) {
       throw new Error(result.error)

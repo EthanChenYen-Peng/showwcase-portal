@@ -47,3 +47,9 @@ export interface EducationApiRequest extends NextApiRequest {
     description: string
   }
 }
+
+export interface IEducation {
+  degree: string
+  school: string
+  id: string
+}
