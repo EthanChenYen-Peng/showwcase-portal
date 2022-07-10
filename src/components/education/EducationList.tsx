@@ -1,15 +1,17 @@
 import { IEducation } from '@/lib/types'
+import { Box, Stack } from '@/components/primitives'
+import EducationItem from './EducationItem'
 
 interface Props {
   educations: IEducation[]
 }
 function EducationList({ educations }: Props) {
   return (
-    <div>
+    <Stack gap="2rem">
       {educations.map((education) => (
-        <div key={education.id}>{education.school}</div>
+        <EducationItem key={education.id} education={education} />
       ))}
-    </div>
+    </Stack>
   )
 }
 
