@@ -56,4 +56,5 @@ export interface IEducation {
   endYear: string
   grade: string
   description: string
+  createdAt: string
 }

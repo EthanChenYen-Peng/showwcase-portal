@@ -29,6 +29,7 @@ export default async function educations(
           endYear: true,
           grade: true,
           description: true,
+          createdAt: true,
         },
       })
       res.json({ educations: records })

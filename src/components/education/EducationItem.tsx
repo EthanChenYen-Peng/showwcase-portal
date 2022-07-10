@@ -6,7 +6,9 @@ interface Props {
   education: IEducation
 }
 function EducationItem({ education }: Props) {
-  const { school, degree, startYear, endYear, grade, description } = education
+  const { school, degree, startYear, endYear, grade, description, createdAt } =
+    education
+  console.log(createdAt)
 
   const formatYear = (dateTime: string) => moment(dateTime).format('MMMM YYYY')
   return (
