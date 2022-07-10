@@ -2,20 +2,15 @@ import { GetServerSideProps } from 'next'
 import { getUserFromToken } from '@/utils/auth'
 import type { IUser } from '@/lib/types'
 import MainLayout from '@/components/layout/MainLayout'
-import UserNameForm from '@/components/dashboard/UserNameForm'
 
 interface Props {
   user: IUser
 }
-function Home({ user }: Props) {
-  return (
-    <MainLayout user={user}>
-      <UserNameForm />
-    </MainLayout>
-  )
+function Education({ user }: Props) {
+  return <MainLayout user={user}>Education</MainLayout>
 }
 
-export default Home
+export default Education
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = context.req.cookies
@@ -24,11 +19,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (token) {
     user = await getUserFromToken(token)
   }
-  if (user?.name) {
+  if (!user?.name) {
     return {
       redirect: {
         permanent: false,
-        destination: '/education',
+        destination: '/',
       },
     }
   }
