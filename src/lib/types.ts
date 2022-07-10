@@ -36,3 +36,14 @@ export interface UserApiRequest extends NextApiRequest {
     name: string
   }
 }
+
+export interface EducationApiRequest extends NextApiRequest {
+  body: {
+    degree: string
+    school: string
+    start: string
+    end: string
+    grade: string
+    description: string
+  }
+}

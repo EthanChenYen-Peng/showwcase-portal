@@ -19,8 +19,21 @@ export async function logout(): Promise<AuthResponse> {
 }
 
 export async function updateUser(data: { name: string }) {
-  console.log('data', data)
   return fetchWithError(`${window.location.origin}/api/users`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function createEducation(data: {
+  degree: string
+  school: string
+  start: string
+  end: string
+  grade: string
+  description: string
+}) {
+  return fetchWithError(`${window.location.origin}/api/educations`, {
     method: 'POST',
     body: JSON.stringify(data),
   })

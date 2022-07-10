@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useMutation } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
+import { createEducation } from '@/lib/api'
 function EducationForm() {
   const [degree, setDegree] = useState('')
   const [school, setSchool] = useState('')
@@ -7,6 +9,13 @@ function EducationForm() {
   const [end, setEnd] = useState('')
   const [grade, setGrade] = useState('')
   const [description, setDescription] = useState('')
+  const { mutate } = useMutation(createEducation)
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    console.log('submit')
+    mutate({ degree, school, start, end, grade, description })
+  }
   return (
     <Box>
       <Box borderBottom="1px solid lightgray " paddingY="1rem">
@@ -14,13 +23,20 @@ function EducationForm() {
           Credentials
         </Text>
       </Box>
-
-      <Stack as="form" width="50%" marginX="auto" paddingY="2rem" gap="1.2rem">
+      <Stack
+        as="form"
+        width="50%"
+        marginX="auto"
+        paddingY="2rem"
+        gap="1.2rem"
+        onSubmit={handleSubmit}
+      >
         <Stack>
           <Text as="label" htmlFor="degree" fontWeight="500">
             Degree
           </Text>
           <Input
+            required
             type="text"
             id="degree"
             placeholder="Eg. Bachelor of Computer Science"
@@ -47,6 +63,7 @@ function EducationForm() {
             Start Year
           </Text>
           <Input
+            required
             type="month"
             id="start"
             marginY={'0.5rem'}
@@ -59,6 +76,7 @@ function EducationForm() {
             End Year
           </Text>
           <Input
+            required
             type="month"
             id="end"
             marginY={'0.5rem'}
@@ -71,6 +89,7 @@ function EducationForm() {
             Grade
           </Text>
           <Input
+            required
             type="text"
             id="grade"
             placeholder="Eg. H1, Distinction"
@@ -89,6 +108,7 @@ function EducationForm() {
             Description
           </Text>
           <textarea
+            required
             id="description"
             name="description"
             rows={6}
