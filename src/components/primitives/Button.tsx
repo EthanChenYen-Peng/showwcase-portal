@@ -1,17 +1,30 @@
 import styled from 'styled-components'
-import { variant, space, border, layout, typography } from 'styled-system'
+import {
+  variant,
+  space,
+  border,
+  layout,
+  typography,
+  flexbox,
+} from 'styled-system'
 import type {
   SpaceProps,
   BorderProps,
   LayoutProps,
   TypographyProps,
+  FlexboxProps,
 } from 'styled-system'
 
 interface Props {
   variant: 'primary' | 'secondary'
 }
 const Button = styled('button')<
-  Props | SpaceProps | BorderProps | LayoutProps | TypographyProps
+  | Props
+  | SpaceProps
+  | BorderProps
+  | LayoutProps
+  | TypographyProps
+  | FlexboxProps
 >(
   {
     border: 'none',
@@ -22,6 +35,7 @@ const Button = styled('button')<
   border,
   layout,
   typography,
+  flexbox,
   variant({
     variants: {
       primary: {
