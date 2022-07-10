@@ -14,7 +14,7 @@ const customStyles = {
   },
   content: {
     width: '70%',
-    height: '70%',
+    height: '80%',
     margin: 'auto auto',
   },
 }

@@ -5,6 +5,7 @@ import type { IUser } from '@/lib/types'
 import MainLayout from '@/components/layout/MainLayout'
 import { Text, Stack, Box, Grid, Button } from '@/components/primitives'
 import Modal from '@/components/utils/Modal'
+import EducationForm from '@/components/education/EducationForm'
 
 interface Props {
   user: IUser
@@ -31,15 +32,7 @@ function Education({ user }: Props) {
             Add new education
           </Button>
           <Modal isOpen={modalIsOpen} close={closeModal}>
-            <button onClick={closeModal}>close</button>
-            <div>I am a modal</div>
-            <form>
-              <input />
-              <button>tab navigation</button>
-              <button>stays</button>
-              <button>inside</button>
-              <button>the modal</button>
-            </form>
+            <EducationForm />
           </Modal>
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
