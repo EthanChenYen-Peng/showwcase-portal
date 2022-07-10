@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { useMutation } from 'react-query'
-import styled from 'styled-components'
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
 import { useRouter } from 'next/router'
-import { Flex, Stack, Input, Label, Box, Text } from '@/components/primitives'
+import {
+  Button,
+  Flex,
+  Stack,
+  Input,
+  Label,
+  Box,
+  Text,
+} from '@/components/primitives'
 
 interface AuthFormProps {
   mode?: 'register' | 'login'
@@ -73,9 +80,9 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
             placeholder="secret"
           />
         </Stack>
-        <SubmitBtn disabled={isLoading}>
+        <Button variant="primary" disabled={isLoading} minHeight="50px">
           {isLoading ? <ClipLoader loading={isLoading} /> : pageHeading}
-        </SubmitBtn>
+        </Button>
         {isError ? <Box color="danger">{error.message}</Box> : null}
       </Stack>
     </Flex>
@@ -83,18 +90,3 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
 }
 
 export default AuthForm
-
-const SubmitBtn = styled.button`
-  min-height: 50px;
-  border: none;
-  color: white;
-  background-color: ${({ theme, disabled }) => {
-    return disabled ? theme.colors.accentLight : theme.colors.accent
-  }};
-  transition: background-color 0.2s;
-  cursor: pointer;
-  margin-top: 1rem;
-  &:hover:not(:disabled) {
-    background-color: ${({ theme }) => theme.colors.accentDark};
-  }
-`

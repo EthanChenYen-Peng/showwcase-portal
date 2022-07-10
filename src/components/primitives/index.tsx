@@ -4,5 +4,6 @@ import Input from './Input'
 import Label from './Label'
 import Stack from './Stack'
 import Text from './Text'
+import Button from './Button'
 
-export { Box, Flex, Input, Label, Stack, Text }
+export { Box, Flex, Input, Label, Stack, Text, Button }
