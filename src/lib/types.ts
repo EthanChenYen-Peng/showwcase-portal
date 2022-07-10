@@ -54,4 +54,6 @@ export interface IEducation {
   id: string
   startYear: string
   endYear: string
+  grade: string
+  description: string
 }

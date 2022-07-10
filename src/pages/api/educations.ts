@@ -27,6 +27,8 @@ export default async function educations(
           id: true,
           startYear: true,
           endYear: true,
+          grade: true,
+          description: true,
         },
       })
       res.json({ educations: records })
