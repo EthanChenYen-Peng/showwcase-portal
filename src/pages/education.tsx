@@ -16,9 +16,6 @@ interface Props {
   user: IUser
 }
 
-interface Response {
-  educations: IEducation[]
-}
 function Education({ user }: Props) {
   const [modalIsOpen, setIsOpen] = useState(false)
   const { name } = user
@@ -27,7 +24,7 @@ function Education({ user }: Props) {
 
   const { isLoading, isSuccess, data } = useQuery(
     ['educations'],
-    fetchEducations<Response>
+    fetchEducations<{ educations: IEducation[] }>
   )
   return (
     <MainLayout user={user}>

@@ -1,5 +1,5 @@
 import { IEducation } from '@/lib/types'
-import { Box, Stack } from '@/components/primitives'
+import { Stack } from '@/components/primitives'
 import EducationItem from './EducationItem'
 
 interface Props {
