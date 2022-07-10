@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { updateUser } from '@/lib/api'
 import { FormEventHandler, useState } from 'react'
 import { useMutation } from 'react-query'
@@ -6,7 +7,12 @@ import { Stack, Text, Input, Button } from '@/components/primitives'
 
 function UserNameForm() {
   const [name, setName] = useState('')
-  const { mutate, isLoading } = useMutation(updateUser)
+  const router = useRouter()
+  const { mutate, isLoading } = useMutation(updateUser, {
+    onSuccess: async () => {
+      await router.push('/education')
+    },
+  })
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     mutate({ name })
