@@ -10,7 +10,13 @@ function EducationItem({ education }: Props) {
 
   const formatYear = (dateTime: string) => moment(dateTime).format('MMMM YYYY')
   return (
-    <Stack gap="1rem">
+    <Stack
+      gap="1rem"
+      border="1px solid lightgray"
+      padding="1rem"
+      borderRadius="0.5rem"
+      boxShadow="6px 15px 15px -7px rgba(0,0,0,0.1);"
+    >
       <Text as="h3" fontSize="1.5rem">
         {degree} @ {school}
       </Text>

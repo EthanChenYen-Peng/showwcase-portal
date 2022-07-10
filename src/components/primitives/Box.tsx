@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { space, color, border, layout, flexbox, grid } from 'styled-system'
+import {
+  shadow,
+  space,
+  color,
+  border,
+  layout,
+  flexbox,
+  grid,
+} from 'styled-system'
 import type {
   SpaceProps,
   ColorProps,
@@ -7,6 +15,7 @@ import type {
   LayoutProps,
   GridProps,
   FlexboxProps,
+  ShadowProps,
 } from 'styled-system'
 
 export type BoxProps =
@@ -16,6 +25,7 @@ export type BoxProps =
   | LayoutProps
   | GridProps
   | FlexboxProps
+  | ShadowProps
 
 const Box = styled.div<BoxProps>`
   box-sizing: border-box;
@@ -25,5 +35,6 @@ const Box = styled.div<BoxProps>`
 	${layout}
 	${flexbox}
 	${grid}
+  ${shadow}
 `
 export default Box

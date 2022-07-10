@@ -31,7 +31,7 @@ function Education({ user }: Props) {
   )
   return (
     <MainLayout user={user}>
-      <Box width="90%" margin="0 auto">
+      <Box height="100%" width="90%" margin="0 auto">
         <Stack alignItems="center" marginY="2rem" gap="2rem">
           <Text as="h2" textAlign="center" fontSize="1.5rem">
             Welcome to {name}&apos;s education page
@@ -52,7 +52,7 @@ function Education({ user }: Props) {
           <Box gridColumn="span 3" bg="lightgray">
             asdf
           </Box>
-          <Box gridColumn="span 7" bg="lightgray">
+          <Box gridColumn="span 7">
             <ClipLoader loading={isLoading} />
             {isSuccess && <EducationList educations={data?.educations} />}
           </Box>
