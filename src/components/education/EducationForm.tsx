@@ -1,22 +1,12 @@
 import { useState } from 'react'
-import { useMutation, useQueryClient, useQuery } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
-import { createEducation, fetchSchools } from '@/lib/api'
-import Select from 'react-select'
+import { createEducation } from '@/lib/api'
+import SchoolSelect from '@/components/education/SchoolSelect'
 
 interface Props {
   afterSubmitSuecess: () => void
 }
-
-interface ISchool {
-  name: string
-}
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-]
 
 function EducationForm({ afterSubmitSuecess }: Props) {
   const [degree, setDegree] = useState('')
@@ -25,24 +15,6 @@ function EducationForm({ afterSubmitSuecess }: Props) {
   const [end, setEnd] = useState('')
   const [grade, setGrade] = useState('')
   const [description, setDescription] = useState('')
-
-  const { data } = useQuery(['schools', school], async () => {
-    const response = await fetchSchools<{ schools: ISchool[] }>(school)
-    console.log({ response })
-    return response
-  })
-  let schoolOptions
-  if (data) {
-    schoolOptions = data.schools.map((school) => {
-      return {
-        value: school.name,
-        label: school.name,
-      }
-    })
-  } else {
-    schoolOptions = options
-  }
-  console.log({ schoolOptions })
 
   const queryClient = useQueryClient()
   const { mutate } = useMutation(createEducation, {
@@ -89,16 +61,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
           <Text as="label" htmlFor="school" fontWeight="500">
             School
           </Text>
-          <Select
-            onChange={(selected) => {
-              console.log({ selected })
-              if (selected) {
-                setSchool(selected.value)
-              }
-            }}
-            options={schoolOptions}
-          />
-          {school}
+          <SchoolSelect school={school} setSchool={setSchool} />
         </Stack>
         <Stack>
           <Text as="label" htmlFor="start" fontWeight="500">
