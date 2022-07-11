@@ -38,7 +38,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
       </Box>
       <Stack
         as="form"
-        width="50%"
+        width={['80%', '50%']}
         marginX="auto"
         paddingY="2rem"
         gap="1.2rem"

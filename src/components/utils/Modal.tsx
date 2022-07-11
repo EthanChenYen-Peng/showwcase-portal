@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactModal from 'react-modal'
+import styled from 'styled-components'
 
 ReactModal.setAppElement('#__next')
 
@@ -14,22 +15,9 @@ function Modal({ children, isOpen, close }: Props) {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={close}
-      style={{
-        overlay: {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(125, 125, 125, 0.7)',
-        },
-        content: {
-          width: '70%',
-          height: '80%',
-          margin: 'auto auto',
-        },
-      }}
       contentLabel="Example Modal"
+      className="Modal"
+      overlayClassName="Overlay"
     >
       {children}
     </ReactModal>
@@ -37,3 +25,18 @@ function Modal({ children, isOpen, close }: Props) {
 }
 
 export default Modal
+
+const StyledModal = styled(ReactModal)`
+  background-color: red;
+  position: absolute;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  webkitoverflowscrolling: touch;
+  borderradius: 4px;
+  outline: none;
+  padding: 20px;
+  width: 70%;
+  height: 80%;
+  margin: auto auto;
+`

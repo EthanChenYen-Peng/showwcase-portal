@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { ThemeProvider } from 'styled-components'
 import theme from '@/config/theme'
 import GlobalStyle from '@/config/globalstyles'
+import '../styles/Modal.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [client] = useState(() => new QueryClient())
