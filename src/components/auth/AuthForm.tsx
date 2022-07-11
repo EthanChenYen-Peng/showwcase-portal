@@ -3,7 +3,6 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { useMutation } from 'react-query'
 import { register, login } from '@/lib/api'
 import { AuthUserPayload, AuthResponse } from '@/lib/types'
-import { useRouter } from 'next/router'
 import {
   Button,
   Flex,
@@ -23,15 +22,14 @@ function AuthForm({ mode = 'register' }: AuthFormProps) {
   const pageHeading = isRegisterForm ? 'Register' : 'Login'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const router = useRouter()
 
   const { mutate, isLoading, error, isError } = useMutation<
     AuthResponse,
     Error,
     AuthUserPayload
   >(mutationFunction, {
-    onSuccess: async () => {
-      await router.push('/')
+    onSuccess: () => {
+      window.location.replace('/')
     },
   })
 
