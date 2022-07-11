@@ -25,6 +25,10 @@ export async function updateUser(data: { name: string }) {
   })
 }
 
+export async function fetchSchools<T>(name: string) {
+  return fetchWithError<T>(`${window.location.origin}/api/schools?name=${name}`)
+}
+
 export async function createEducation(data: {
   degree: string
   school: string

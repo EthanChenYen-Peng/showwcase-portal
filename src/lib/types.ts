@@ -58,3 +58,10 @@ export interface IEducation {
   description: string
   createdAt: string
 }
+
+export interface SchoolApiRequest extends NextApiRequest {
+  body: {
+    name?: string
+    country?: string
+  }
+}

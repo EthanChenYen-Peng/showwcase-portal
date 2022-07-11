@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient, useQuery } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
-import { createEducation } from '@/lib/api'
+import { createEducation, fetchSchools } from '@/lib/api'
 
 interface Props {
   afterSubmitSuecess: () => void
+}
+
+interface ISchool {
+  name: string
 }
 function EducationForm({ afterSubmitSuecess }: Props) {
   const [degree, setDegree] = useState('')
@@ -13,6 +17,12 @@ function EducationForm({ afterSubmitSuecess }: Props) {
   const [end, setEnd] = useState('')
   const [grade, setGrade] = useState('')
   const [description, setDescription] = useState('')
+
+  const { data } = useQuery(['schools', school], async () => {
+    const schools = await fetchSchools<{ schools: ISchool[] }>(school)
+    return schools
+  })
+  console.log({ data })
 
   const queryClient = useQueryClient()
   const { mutate } = useMutation(createEducation, {
