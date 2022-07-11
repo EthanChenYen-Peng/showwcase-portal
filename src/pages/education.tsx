@@ -49,10 +49,10 @@ function Education({ user }: Props) {
           <Box gridColumn="span 3" bg="lightgray">
             asdf
           </Box>
-          <Box gridColumn="span 7">
+          <Stack gridColumn="span 7" alignItems="center" minHeight="500px">
             <ClipLoader loading={isLoading} />
             {isSuccess && <EducationList educations={data?.educations} />}
-          </Box>
+          </Stack>
         </Grid>
       </Box>
     </MainLayout>

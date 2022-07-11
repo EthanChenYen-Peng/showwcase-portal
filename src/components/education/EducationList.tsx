@@ -10,7 +10,7 @@ function EducationList({ educations }: Props) {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   })
   return (
-    <Stack gap="2rem">
+    <Stack gap="2rem" alignSelf="stretch">
       {sortedEducations.map((education) => (
         <EducationItem key={education.id} education={education} />
       ))}
