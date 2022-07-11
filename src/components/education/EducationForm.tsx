@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
 import { useMutation, useQueryClient } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
 import { createEducation } from '@/lib/api'
@@ -17,7 +18,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
   const [description, setDescription] = useState('')
 
   const queryClient = useQueryClient()
-  const { mutate } = useMutation(createEducation, {
+  const { mutate, isLoading } = useMutation(createEducation, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(['educations'])
       afterSubmitSuecess()
@@ -122,8 +123,13 @@ function EducationForm({ afterSubmitSuecess }: Props) {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </Stack>
-        <Button variant="primary" padding="1rem" fontSize="1.25rem">
-          Save
+        <Button
+          variant="primary"
+          disabled={isLoading}
+          padding="1rem"
+          fontSize="1.25rem"
+        >
+          {isLoading ? <ClipLoader loading={isLoading} /> : 'Save'}
         </Button>
       </Stack>
     </Box>
