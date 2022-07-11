@@ -29,6 +29,9 @@ function Education({ user }: Props) {
   )
 
   const educations = data?.educations || []
+  const sortedEducations = educations.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  })
   return (
     <MainLayout user={user}>
       <Box height="100%" width="90%" margin="0 auto">
@@ -50,11 +53,11 @@ function Education({ user }: Props) {
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
           <Box gridColumn="span 3">
-            {isSuccess && <EducationBookmark educations={data?.educations} />}
+            {isSuccess && <EducationBookmark educations={sortedEducations} />}
           </Box>
           <Stack gridColumn="span 7" alignItems="center" minHeight="500px">
             <ClipLoader loading={isLoading} />
-            {isSuccess && <EducationList educations={data?.educations} />}
+            {isSuccess && <EducationList educations={sortedEducations} />}
           </Stack>
         </Grid>
       </Box>

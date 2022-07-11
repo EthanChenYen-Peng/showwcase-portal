@@ -6,12 +6,8 @@ interface Props {
   educations: IEducation[]
 }
 function EducationList({ educations }: Props) {
-  const sortedEducations = educations.sort((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  })
-
   const hasRecords = educations.length > 0
-  const educationItems = sortedEducations.map((education) => (
+  const educationItems = educations.map((education) => (
     <EducationItem key={education.id} education={education} />
   ))
   return (
