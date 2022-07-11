@@ -73,6 +73,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
             id="start"
             marginY={'0.5rem'}
             padding="0.5rem 1rem"
+            max={end}
             onChange={(e) => setStart(e.target.value)}
           />
         </Stack>
@@ -86,6 +87,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
             id="end"
             marginY={'0.5rem'}
             padding="0.5rem 1rem"
+            min={start}
             onChange={(e) => setEnd(e.target.value)}
           />
         </Stack>
