@@ -10,6 +10,7 @@ import { fetchEducations } from '@/lib/api'
 import { useQuery } from 'react-query'
 import ClipLoader from 'react-spinners/ClipLoader'
 import EducationList from '@/components/education/EducationList'
+import EducationBookmark from '@/components/education/EducationBookmark'
 import { IEducation } from '@/lib/types'
 
 interface Props {
@@ -46,8 +47,14 @@ function Education({ user }: Props) {
           </Modal>
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
-          <Box gridColumn="span 3" bg="lightgray">
-            asdf
+          <Box
+            gridColumn="span 3"
+            border="1px solid lightgray"
+            padding="1rem"
+            borderRadius="0.5rem"
+            boxShadow="6px 15px 15px -7px rgba(0,0,0,0.1);"
+          >
+            {isSuccess && <EducationBookmark educations={data?.educations} />}
           </Box>
           <Stack gridColumn="span 7" alignItems="center" minHeight="500px">
             <ClipLoader loading={isLoading} />
