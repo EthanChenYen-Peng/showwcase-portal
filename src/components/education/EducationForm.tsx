@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient, useQuery } from 'react-query'
 import { Text, Input, Stack, Box, Button } from '@/components/primitives'
 import { createEducation, fetchSchools } from '@/lib/api'
+import Select from 'react-select'
 
 interface Props {
   afterSubmitSuecess: () => void
@@ -10,19 +11,38 @@ interface Props {
 interface ISchool {
   name: string
 }
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+]
+
 function EducationForm({ afterSubmitSuecess }: Props) {
   const [degree, setDegree] = useState('')
-  const [school, setSchool] = useState('')
+  const [school, setSchool] = useState('sydney')
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
   const [grade, setGrade] = useState('')
   const [description, setDescription] = useState('')
 
   const { data } = useQuery(['schools', school], async () => {
-    const schools = await fetchSchools<{ schools: ISchool[] }>(school)
-    return schools
+    const response = await fetchSchools<{ schools: ISchool[] }>(school)
+    console.log({ response })
+    return response
   })
-  console.log({ data })
+  let schoolOptions
+  if (data) {
+    schoolOptions = data.schools.map((school) => {
+      return {
+        value: school.name,
+        label: school.name,
+      }
+    })
+  } else {
+    schoolOptions = options
+  }
+  console.log({ schoolOptions })
 
   const queryClient = useQueryClient()
   const { mutate } = useMutation(createEducation, {
@@ -69,14 +89,16 @@ function EducationForm({ afterSubmitSuecess }: Props) {
           <Text as="label" htmlFor="school" fontWeight="500">
             School
           </Text>
-          <Input
-            type="text"
-            id="school"
-            placeholder="Eg. University of Sydney"
-            marginY={'0.5rem'}
-            padding="0.5rem 1rem"
-            onChange={(e) => setSchool(e.target.value)}
+          <Select
+            onChange={(selected) => {
+              console.log({ selected })
+              if (selected) {
+                setSchool(selected.value)
+              }
+            }}
+            options={schoolOptions}
           />
+          {school}
         </Stack>
         <Stack>
           <Text as="label" htmlFor="start" fontWeight="500">
