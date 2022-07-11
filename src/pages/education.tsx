@@ -27,6 +27,8 @@ function Education({ user }: Props) {
     ['educations'],
     fetchEducations<{ educations: IEducation[] }>
   )
+
+  const educations = data?.educations || []
   return (
     <MainLayout user={user}>
       <Box height="100%" width="90%" margin="0 auto">
@@ -47,13 +49,7 @@ function Education({ user }: Props) {
           </Modal>
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
-          <Box
-            gridColumn="span 3"
-            border="1px solid lightgray"
-            padding="1rem"
-            borderRadius="0.5rem"
-            boxShadow="6px 15px 15px -7px rgba(0,0,0,0.1);"
-          >
+          <Box gridColumn="span 3">
             {isSuccess && <EducationBookmark educations={data?.educations} />}
           </Box>
           <Stack gridColumn="span 7" alignItems="center" minHeight="500px">
