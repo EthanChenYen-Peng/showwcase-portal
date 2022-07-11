@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { useMutation, useQueryClient } from 'react-query'
-import { Text, Input, Stack, Box, Button } from '@/components/primitives'
+import { Text, Flex, Input, Stack, Box, Button } from '@/components/primitives'
 import { createEducation } from '@/lib/api'
 import SchoolSelect from '@/components/education/SchoolSelect'
+import { AiOutlineClose } from 'react-icons/ai'
 
 interface Props {
-  afterSubmitSuecess: () => void
+  close: () => void
 }
 
-function EducationForm({ afterSubmitSuecess }: Props) {
+function EducationForm({ close }: Props) {
   const [degree, setDegree] = useState('')
   const [school, setSchool] = useState('sydney')
   const [start, setStart] = useState('')
@@ -21,7 +22,7 @@ function EducationForm({ afterSubmitSuecess }: Props) {
   const { mutate, isLoading } = useMutation(createEducation, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(['educations'])
-      afterSubmitSuecess()
+      close()
     },
   })
 
@@ -31,11 +32,16 @@ function EducationForm({ afterSubmitSuecess }: Props) {
   }
   return (
     <Box>
-      <Box borderBottom="1px solid lightgray " paddingY="1rem">
+      <Flex
+        justifyContent="space-between"
+        borderBottom="1px solid lightgray "
+        paddingY="1rem"
+      >
         <Text as="h1" fontSize="1.5rem">
           Credentials
         </Text>
-      </Box>
+        <AiOutlineClose onClick={close} />
+      </Flex>
       <Stack
         as="form"
         width={['80%', '50%']}

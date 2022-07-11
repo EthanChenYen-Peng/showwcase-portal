@@ -48,7 +48,7 @@ function Education({ user }: Props) {
             Add new education
           </Button>
           <Modal isOpen={modalIsOpen} close={closeModal}>
-            <EducationForm afterSubmitSuecess={closeModal} />
+            <EducationForm close={closeModal} />
           </Modal>
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
