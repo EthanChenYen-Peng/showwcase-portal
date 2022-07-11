@@ -52,10 +52,14 @@ function Education({ user }: Props) {
           </Modal>
         </Stack>
         <Grid gridTemplateColumns="repeat(12, 1fr)" gridGap="2rem">
-          <Box gridColumn="span 3">
+          <Box gridColumn="span 3" display={['none', 'none', 'block']}>
             {isSuccess && <EducationBookmark educations={sortedEducations} />}
           </Box>
-          <Stack gridColumn="span 7" alignItems="center" minHeight="500px">
+          <Stack
+            gridColumn={['span 12', 'span 12', 'span 7']}
+            alignItems="center"
+            minHeight="500px"
+          >
             <ClipLoader loading={isLoading} />
             {isSuccess && <EducationList educations={sortedEducations} />}
           </Stack>
