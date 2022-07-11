@@ -21,12 +21,11 @@ function Modal({ children, isOpen, close }: Props) {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'papayawhip',
+          backgroundColor: 'rgba(125, 125, 125, 0.7)',
         },
         content: {
           width: '70%',
           height: '80%',
-          color: 'lightsteelblue',
           margin: 'auto auto',
         },
       }}
